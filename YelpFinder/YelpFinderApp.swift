@@ -10,7 +10,7 @@ import SwiftData
 
 @main
 struct YelpFinderApp: App {
-    let service: YelpServiceProtocol = YelpServiceJsonMock()
+    let service: YelpServiceProtocol = YelpService()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,

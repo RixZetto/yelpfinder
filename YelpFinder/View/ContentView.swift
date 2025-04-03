@@ -12,8 +12,7 @@ import Kingfisher
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject var viewModel: ContentViewModel
-    @Query private var items: [Item]
-    
+
     init(service: YelpServiceProtocol) {
         self._viewModel = StateObject(wrappedValue: ContentViewModel(service: service))
     }
@@ -50,41 +49,18 @@ struct ContentView: View {
                             BusinessRow(business: business)
                         }
                     }
-                    .onDelete(perform: deleteItems)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
-            }.background(.thinMaterial)
+                
+            }
+            .background(.thinMaterial)
+            
         } detail: {
             Text("Select an item")
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
 }
 
 #Preview {
-    ContentView(service: YelpServiceMock())
-        .modelContainer(for: Item.self, inMemory: true)
+    ContentView(service: YelpServiceJsonMock())
 }

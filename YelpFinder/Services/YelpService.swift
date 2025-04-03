@@ -54,8 +54,9 @@ class YelpService: YelpServiceProtocol {
             URLQueryItem(name: "latitude", value: String(latitude)),
             URLQueryItem(name: "longitude", value: String(longitude))
         ]
+        
         if let filterText = text {
-            components.queryItems?.append(URLQueryItem(name: "term", value: text))
+            components.queryItems?.append(URLQueryItem(name: "term", value: filterText))
         }
         
         guard let url = components.url else {
