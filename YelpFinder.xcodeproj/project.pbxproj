@@ -43,6 +43,9 @@
 				Model/BusinessesResponse.swift,
 				Services/YelpService.swift,
 				Services/YelpServiceProtocol.swift,
+				Store/CacheStoreProtocol.swift,
+				Store/InMemoryCacheService.swift,
+				Store/PersistentCacheStore.swift,
 				"Util/String+Extension.swift",
 			);
 			target = 4CCF70B12D9DDA5600DA528E /* YelpFinderTests */;

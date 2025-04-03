@@ -37,42 +37,13 @@ struct ContentView: View {
                 List {
                     ForEach(viewModel.businesses) { business in
                         NavigationLink {
-                            VStack {
-                                KFImage(URL(string: business.imageUrl))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(height: 300)
-                                
-                                Text(business.name)
-                                RatingView(rating: business.rating)
-                                Text(business.description)
-                            }
+                            BusinessDetail(business: business)
                         } label: {
-                            VStack(spacing: 10) {
-                                KFImage(URL(string: business.imageUrl))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 300)
-                                
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Text(business.name)
-                                        .font(.headline)
-                                        .lineLimit(1)
-                                    RatingView(rating: business.rating)
-                                    Text(business.description)
-                                        .font(.body)
-                                        .lineLimit(2)
-                                }
-                            }
-                            
-                            .listRowInsets(EdgeInsets())
-                            .listRowBackground(Color.clear)
+                            BusinessRow(business: business)
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                     .onDelete(perform: deleteItems)
                 }
-                .listStyle(PlainListStyle())
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
@@ -83,7 +54,7 @@ struct ContentView: View {
                         }
                     }
                 }
-            }
+            }.background(.thinMaterial)
         } detail: {
             Text("Select an item")
         }
