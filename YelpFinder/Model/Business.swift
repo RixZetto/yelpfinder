@@ -16,19 +16,15 @@ struct Business: Identifiable, Codable {
     let url: String
     let reviewCount: Int
     let categories: [Category]
-    let rating: String
-    let coordinates: [Coordinate]
+    let rating: Double
+    let coordinates: Coordinate
     let transactions: [String]
-    let price: String
+    let price: String?
     let location: Location
     let phone: String
     let displayPhone: String
-    let distance: String
-    // attributes
-    // businessHours
-    let total: Int
-    //let region
-    
+    let distance: Double
+
     enum CodingKeys: String, CodingKey {
         case id
         case alias
@@ -41,12 +37,11 @@ struct Business: Identifiable, Codable {
         case rating
         case coordinates
         case transactions
-        case price
+        case price = "price"
         case location
         case phone
         case displayPhone = "display_phone"
         case distance
-        case total
     }
     
 }
@@ -63,8 +58,8 @@ struct Coordinate: Codable {
 
 struct Location: Codable {
     let address1: String
-    let address2: String
-    let address3: String
+    let address2: String?
+    let address3: String?
     let city: String
     let zipCode: String
     let country: String
@@ -73,7 +68,7 @@ struct Location: Codable {
     let crossStreet: String?
     
     enum CodingKeys: String, CodingKey {
-        case address1 = "address"
+        case address1
         case address2
         case address3
         case city
