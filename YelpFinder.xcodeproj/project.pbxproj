@@ -27,11 +27,29 @@
 		4CCF70A02D9DDA5400DA528E /* YelpFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CCF70B22D9DDA5600DA528E /* YelpFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YelpFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CCF70BC2D9DDA5600DA528E /* YelpFinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YelpFinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CCF70E82D9DDB9700DA528E /* YelpFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = YelpFinder.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4CCF71172D9ED28800DA528E /* Exceptions for "YelpFinder" folder in "YelpFinderTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/AutoCompleteResponse.swift,
+				Model/Business.swift,
+				Model/BusinessesResponse.swift,
+				Services/YelpServiceProtocol.swift,
+				"Util/String+Extension.swift",
+			);
+			target = 4CCF70B12D9DDA5600DA528E /* YelpFinderTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4CCF70A22D9DDA5400DA528E /* YelpFinder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4CCF71172D9ED28800DA528E /* Exceptions for "YelpFinder" folder in "YelpFinderTests" target */,
+			);
 			path = YelpFinder;
 			sourceTree = "<group>";
 		};
@@ -89,6 +107,11 @@
 				4CCF70B22D9DDA5600DA528E /* YelpFinderTests.xctest */,
 				4CCF70BC2D9DDA5600DA528E /* YelpFinderUITests.xctest */,
 			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4CCF70EA2D9DDB9700DA528E /* Products */ = {
+			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -198,6 +221,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4CCF70A12D9DDA5400DA528E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4CCF70EA2D9DDB9700DA528E /* Products */;
+					ProjectRef = 4CCF70E82D9DDB9700DA528E /* YelpFinder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4CCF709F2D9DDA5400DA528E /* YelpFinder */,
