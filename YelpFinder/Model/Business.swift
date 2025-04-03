@@ -24,6 +24,10 @@ struct Business: Identifiable, Codable {
     let phone: String
     let displayPhone: String
     let distance: Double
+    
+    var description: String {
+        return "\(location)"
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -66,6 +70,10 @@ struct Location: Codable {
     let state: String
     let displayAddress: [String]
     let crossStreet: String?
+    
+    var description: String {
+        return "\(address1) \(city), \(state) \(zipCode) \(country)"
+    }
     
     enum CodingKeys: String, CodingKey {
         case address1

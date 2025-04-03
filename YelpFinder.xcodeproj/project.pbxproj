@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4CCF718E2D9EEAE100DA528E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4CCF718D2D9EEAE100DA528E /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4CCF70B32D9DDA5600DA528E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -37,6 +41,7 @@
 				Model/AutoCompleteResponse.swift,
 				Model/Business.swift,
 				Model/BusinessesResponse.swift,
+				Services/YelpService.swift,
 				Services/YelpServiceProtocol.swift,
 				"Util/String+Extension.swift",
 			);
@@ -70,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCF718E2D9EEAE100DA528E /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +141,7 @@
 			);
 			name = YelpFinder;
 			packageProductDependencies = (
+				4CCF718D2D9EEAE100DA528E /* Kingfisher */,
 			);
 			productName = YelpFinder;
 			productReference = 4CCF70A02D9DDA5400DA528E /* YelpFinder.app */;
@@ -218,6 +225,9 @@
 			);
 			mainGroup = 4CCF70972D9DDA5400DA528E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4CCF718C2D9EEAE100DA528E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4CCF70A12D9DDA5400DA528E /* Products */;
 			projectDirPath = "";
@@ -587,6 +597,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4CCF718C2D9EEAE100DA528E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4CCF718D2D9EEAE100DA528E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CCF718C2D9EEAE100DA528E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4CCF70982D9DDA5400DA528E /* Project object */;
 }
