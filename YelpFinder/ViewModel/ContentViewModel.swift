@@ -18,7 +18,8 @@ class ContentViewModel: ObservableObject {
     @Published var businesses: [Business] = []
     @Published var resultForText: String = ""
     @Published var errorMessage: String?
-    
+    @Published var isAboutViewPresented: Bool = false
+
     init(service: YelpServiceProtocol,
          cache: AnyCacheStore<BusinessesResponse>) {
         self.service = service
@@ -69,6 +70,10 @@ class ContentViewModel: ObservableObject {
             errorMessage = "Error on fetching data"
             isSearching = false
         }
+    }
+    
+    func showAboutView() {
+        isAboutViewPresented.toggle()
     }
     
     

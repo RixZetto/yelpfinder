@@ -55,15 +55,32 @@ struct ContentView: View {
                             BusinessRow(business: business)
                         }
                     }
+                }.toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            viewModel.showAboutView()
+                        }) {
+                            Label("About", systemImage: "user.circle")
+                        }
+                    }
                 }
                 
             }
             .background(.thinMaterial)
+
             
         } detail: {
             Text("Select an item")
+        }.sheet(isPresented: $viewModel.isAboutViewPresented) {
+            Group {
+                AboutView()
+            }.accessibilityIdentifier("AboutSheet")
+                .presentationDetents([.medium, .large])
+                .padding(10)
+            
         }
     }
+    
 
 }
 
