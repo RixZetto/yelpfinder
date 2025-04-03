@@ -10,7 +10,10 @@ import SwiftData
 
 @main
 struct YelpFinderApp: App {
+
+    let businessCache: AnyCacheStore<BusinessesResponse> = CacheType.makeCache(type: .persistent(name: "businesses_response_cache"))
     let service: YelpServiceProtocol = YelpService()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,7 +29,7 @@ struct YelpFinderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(service: service)
+            ContentView(service: service, cache: businessCache)
         }
         .modelContainer(sharedModelContainer)
     }

@@ -7,7 +7,7 @@
 import Foundation
 
 /// This class store any codable item as a json file in a directory indicated in the constructor as name parameter
-class PersistentCacheStore<T: Codable>: CacheStoreProtocol {
+class PersistentCacheStore<T:Codable>: CacheStoreProtocol {
     private struct CodableCacheItem: Codable {
         let item: T
         let expirationDate: Date
@@ -30,7 +30,7 @@ class PersistentCacheStore<T: Codable>: CacheStoreProtocol {
         }
     }
     
-    func store(item: T, forKey key: String) {
+    func create(item: T, forKey key: String) {
         let expirationDate = Date().addingTimeInterval(expirationTime)
         let cacheItem = CodableCacheItem(item: item, expirationDate: expirationDate)
         guard let data = try? JSONEncoder().encode(cacheItem) else { return }

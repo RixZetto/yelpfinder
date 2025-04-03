@@ -42,7 +42,6 @@ class YelpService: YelpServiceProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
             .decode(type: AutoCompleteResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main )
             .eraseToAnyPublisher()
     }
     
@@ -69,7 +68,6 @@ class YelpService: YelpServiceProtocol {
         return URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
             .decode(type: BusinessesResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main )
             .eraseToAnyPublisher()
     }
     

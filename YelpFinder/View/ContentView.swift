@@ -10,11 +10,11 @@ import SwiftData
 import Kingfisher
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @StateObject var viewModel: ContentViewModel
 
-    init(service: YelpServiceProtocol) {
-        self._viewModel = StateObject(wrappedValue: ContentViewModel(service: service))
+    init(service: YelpServiceProtocol, cache: AnyCacheStore<BusinessesResponse>) {
+        let viewModel = ContentViewModel(service: service, cache: cache)
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -31,6 +31,12 @@ struct ContentView: View {
                     
                     if let errorMessage = viewModel.errorMessage {
                         Text(errorMessage)
+                    }
+                    
+                    if viewModel.isSearching {
+                        ProgressView {
+                            Text("Loading businesses...")
+                        }
                     }
                     
                     if !viewModel.resultForText.isEmpty {
@@ -62,5 +68,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(service: YelpServiceJsonMock())
+    ContentView(service: YelpServiceJsonMock(),
+                cache: CacheType.makeCache(type: .memory))
 }

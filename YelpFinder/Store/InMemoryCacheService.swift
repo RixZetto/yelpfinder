@@ -8,7 +8,7 @@
 import Foundation
 
 /// This class store data in memory 
-class InMemoryCacheStore<T>: CacheStoreProtocol {
+class InMemoryCacheStore<T: Codable>: CacheStoreProtocol {
     private struct CacheData {
         let item: T
         let expiration: Date
@@ -21,13 +21,13 @@ class InMemoryCacheStore<T>: CacheStoreProtocol {
         self.expirationTime = expirationTime
     }
     
-    func store(item: T, forKey key: String) {
+    func create(item: T, forKey key: String) {
         let expirationDate = Date().addingTimeInterval(expirationTime)
-        storage[key] = CacheData(item: item, expiration: expirationDate)
+        storage[key.lowercased()] = CacheData(item: item, expiration: expirationDate)
     }
     
     func retrieve(forKey key: String) -> T? {
-        guard let cachedItem = storage[key],
+        guard let cachedItem = storage[key.lowercased()],
               cachedItem.expiration > Date() // check if is expired
         else { return nil }
         return cachedItem.item

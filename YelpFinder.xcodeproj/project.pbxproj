@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C0AC53B2D9F2D3D003EC542 /* YelpFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = YelpFinder.xcodeproj; sourceTree = "<group>"; };
 		4CCF70A02D9DDA5400DA528E /* YelpFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YelpFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CCF70B22D9DDA5600DA528E /* YelpFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YelpFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CCF70BC2D9DDA5600DA528E /* YelpFinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YelpFinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +49,8 @@
 				Model/BusinessesResponse.swift,
 				Services/YelpService.swift,
 				Services/YelpServiceProtocol.swift,
+				Store/AnyCacheStore.swift,
+				Store/BusinessesResponseCache.swift,
 				Store/CacheStoreProtocol.swift,
 				Store/InMemoryCacheService.swift,
 				Store/PersistentCacheStore.swift,
@@ -55,12 +58,20 @@
 			);
 			target = 4CCF70B12D9DDA5600DA528E /* YelpFinderTests */;
 		};
+		4CCF71B52D9F269300DA528E /* Exceptions for "YelpFinder" folder in "YelpFinder" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4CCF709F2D9DDA5400DA528E /* YelpFinder */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4CCF70A22D9DDA5400DA528E /* YelpFinder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				4CCF71B52D9F269300DA528E /* Exceptions for "YelpFinder" folder in "YelpFinder" target */,
 				4CCF71172D9ED28800DA528E /* Exceptions for "YelpFinder" folder in "YelpFinderTests" target */,
 			);
 			path = YelpFinder;
@@ -104,6 +115,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C0AC53D2D9F2D3D003EC542 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4CCF70972D9DDA5400DA528E = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +259,10 @@
 				{
 					ProductGroup = 4CCF70EA2D9DDB9700DA528E /* Products */;
 					ProjectRef = 4CCF70E82D9DDB9700DA528E /* YelpFinder.xcodeproj */;
+				},
+				{
+					ProductGroup = 4C0AC53D2D9F2D3D003EC542 /* Products */;
+					ProjectRef = 4C0AC53B2D9F2D3D003EC542 /* YelpFinder.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -446,6 +466,7 @@
 				DEVELOPMENT_TEAM = R76UR2Y2GL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YelpFinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,6 +496,7 @@
 				DEVELOPMENT_TEAM = R76UR2Y2GL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YelpFinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
