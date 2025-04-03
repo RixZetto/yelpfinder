@@ -8,8 +8,8 @@ import Foundation
 import Combine
 
 class YelpServiceJsonMock: YelpServiceProtocol {
-    
-    func autoComplete(withText text: String) -> AnyPublisher<AutoCompleteResponse, any Error> {
+
+    func autoComplete(withText text: String, latitude: Double, longitude: Double) -> AnyPublisher<AutoCompleteResponse, any Error> {
         if let response = String.fromJson(filename: "autocomplete_response",
                                           in: Bundle(for: YelpServiceJsonMock.self)) {
             let data = response.data(using: .utf8)!

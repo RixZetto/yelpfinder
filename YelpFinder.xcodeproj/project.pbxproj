@@ -38,6 +38,11 @@
 		4CCF71172D9ED28800DA528E /* Exceptions for "YelpFinder" folder in "YelpFinderTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Mock/autocomplete_response.json,
+				Mock/businesses_response.json,
+				Mock/MockData.swift,
+				Mock/YelpServiceJsonMock.swift,
+				Mock/YelpServiceMock.swift,
 				Model/AutoCompleteResponse.swift,
 				Model/Business.swift,
 				Model/BusinessesResponse.swift,

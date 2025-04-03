@@ -21,7 +21,7 @@ struct YelpFinderTests {
     @Test("YelpService list autocomplete results for 'caf'")
     mutating func checkAutoCompleteResults() async throws {
         
-        let value = try await yelpService.autoComplete(withText: "cof").values.first()
+        let value = try await yelpService.autoComplete(withText: "cof", latitude: 33.669445, longitude: -117.823059).values.first()
         #expect(value != nil)
         
         #expect(value!.businesses.count == 3)

@@ -30,7 +30,7 @@ struct YelpFinderJsonTests {
     
     @Test("YelpService should parse the Real json Response for AutoComplete API Rest Call")
     func fetchAutoCompleteByParsingJsonResponse() async throws {
-        let value = try await yelpService.autoComplete(withText: "").values.first()
+        let value = try await yelpService.autoComplete(withText: "", latitude: 0, longitude: 0).values.first()
         #expect(value != nil)
         #expect(value!.categories.count > 0)
     }

@@ -9,8 +9,8 @@ import Combine
 
 protocol YelpServiceProtocol {
     
-    func autoComplete(withText text: String) -> AnyPublisher<AutoCompleteResponse, Error>
+    func autoComplete(withText text: String, latitude: Double, longitude: Double) throws -> AnyPublisher<AutoCompleteResponse, Error>
     
-    func fetchBusinesses(withText text: String?, latitude: Double, longitude: Double) -> AnyPublisher<BusinessesResponse, Error>
+    func fetchBusinesses(withText text: String?, latitude: Double, longitude: Double) throws -> AnyPublisher<BusinessesResponse, Error>
     
 }

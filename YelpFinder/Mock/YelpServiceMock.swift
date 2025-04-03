@@ -10,7 +10,7 @@ import Combine
 
 class YelpServiceMock: YelpServiceProtocol {
     
-    func autoComplete(withText text: String) -> AnyPublisher<AutoCompleteResponse, any Error> {
+    func autoComplete(withText text: String, latitude: Double, longitude: Double) -> AnyPublisher<AutoCompleteResponse, any Error> {
         
         let categories: [AutoCompleteCategory] = MockData.categories.filter {
             $0.alias.localizedCaseInsensitiveContains(text) ||

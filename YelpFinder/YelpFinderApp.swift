@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct YelpFinderApp: App {
+    let service: YelpServiceProtocol = YelpServiceJsonMock()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +26,7 @@ struct YelpFinderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(service: service)
         }
         .modelContainer(sharedModelContainer)
     }

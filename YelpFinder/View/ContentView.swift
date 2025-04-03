@@ -11,8 +11,12 @@ import Kingfisher
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @StateObject var viewModel = ContentViewModel()
+    @StateObject var viewModel: ContentViewModel
     @Query private var items: [Item]
+    
+    init(service: YelpServiceProtocol) {
+        self._viewModel = StateObject(wrappedValue: ContentViewModel(service: service))
+    }
     
     var body: some View {
         NavigationSplitView {
@@ -24,6 +28,10 @@ struct ContentView: View {
                     
                     if viewModel.businesses.isEmpty {
                         Text("No businesses found")
+                    }
+                    
+                    if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
                     }
                     
                     if !viewModel.resultForText.isEmpty {
@@ -77,6 +85,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(service: YelpServiceMock())
         .modelContainer(for: Item.self, inMemory: true)
 }

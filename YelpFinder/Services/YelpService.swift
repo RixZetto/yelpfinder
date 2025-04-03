@@ -9,31 +9,67 @@ import Combine
 import Foundation
 
 class YelpService: YelpServiceProtocol {
-    
     private let baseURL = "https://api.yelp.com/v3/"
     
-    func autoComplete(withText text: String) -> AnyPublisher<AutoCompleteResponse, any Error> {
-        
-        if let json = String.fromJson(filename: "autocomplete_response") {
-            let data = json.data(using: .utf8)!
-            return Just(try! JSONDecoder().decode(AutoCompleteResponse.self, from: data))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-        
-        return Fail(error: URLError(.badServerResponse)).eraseToAnyPublisher()
+    enum AuthenticationError: Error {
+        case invalidApiKey
     }
     
-    func fetchBusinesses(withText text: String?, latitude: Double, longitude: Double) -> AnyPublisher<BusinessesResponse, any Error> {
+    func getApiKey() throws -> String {
+        guard let apiKey = Bundle.main.infoDictionary?["YelpApiKey"] as? String else {
+            throw AuthenticationError.invalidApiKey
+        }
+        return apiKey
+    }
+    
+    func autoComplete(withText text: String, latitude: Double, longitude: Double) throws -> AnyPublisher<AutoCompleteResponse, any Error> {
+        let apiKey = try getApiKey()
+        var components = URLComponents(string: "\(baseURL)autocomplete")!
+        components.queryItems = [
+            URLQueryItem(name: "text", value: text),
+            URLQueryItem(name: "locale", value: "en_US"),
+            URLQueryItem(name: "latitude", value: String(latitude)),
+            URLQueryItem(name: "longitude", value: String(longitude))
+        ]
         
-        if let json = String.fromJson(filename: "businesses_response") {
-            let data = json.data(using: .utf8)!
-            return Just(try! JSONDecoder().decode(BusinessesResponse.self, from: data))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
+        guard let url = components.url else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         
-        return Fail(error: URLError(.badServerResponse)).eraseToAnyPublisher()
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: AutoCompleteResponse.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main )
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchBusinesses(withText text: String?, latitude: Double, longitude: Double) throws -> AnyPublisher<BusinessesResponse, any Error> {
+        let apiKey = try getApiKey()
+        var components = URLComponents(string: "\(baseURL)businesses/search")!
+        components.queryItems = [
+            URLQueryItem(name: "locale", value: "en_US"),
+            URLQueryItem(name: "latitude", value: String(latitude)),
+            URLQueryItem(name: "longitude", value: String(longitude))
+        ]
+        if let filterText = text {
+            components.queryItems?.append(URLQueryItem(name: "term", value: text))
+        }
+        
+        guard let url = components.url else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: BusinessesResponse.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main )
+            .eraseToAnyPublisher()
     }
     
 }

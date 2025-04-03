@@ -15,9 +15,10 @@ class ContentViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var businesses: [Business] = []
     @Published var resultForText: String = ""
+    @Published var errorMessage: String?
     
-    init() {
-        self.service = YelpService()
+    init(service: YelpServiceProtocol) {
+        self.service = service
         $searchText
             .debounce(for: .milliseconds(500),
                       scheduler: RunLoop.main)
@@ -30,16 +31,23 @@ class ContentViewModel: ObservableObject {
     // MARK: - Service Handlers
     
     func performSearch(query: String) {
+        errorMessage = nil
         let searchText = query.isEmpty ? nil : query
-        self.service.fetchBusinesses(withText: searchText,
-                                latitude: hardcodedLatitude,
-                                longitude: hardcodedLongitude)
-        .sink(receiveCompletion: { _ in },
-              receiveValue: { [weak self] result in
-                self?.businesses = result.businesses
-                self?.resultForText = query
-        })
-        .store(in: &cancellables)
+        do {
+            try self.service.fetchBusinesses(withText: searchText,
+                                    latitude: hardcodedLatitude,
+                                    longitude: hardcodedLongitude)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] result in
+                    self?.businesses = result.businesses
+                    self?.resultForText = query
+            })
+            .store(in: &cancellables)
+            
+        } catch {
+            print(error.localizedDescription)
+            errorMessage = "Error on fetching data"
+        }
     }
     
     
